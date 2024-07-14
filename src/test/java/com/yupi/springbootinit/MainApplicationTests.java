@@ -1,4 +1,4 @@
-package com.yupi.springbootinit;
+package com.yupi.yioj;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

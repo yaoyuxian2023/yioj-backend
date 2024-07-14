@@ -1,6 +1,6 @@
-package com.yupi.springbootinit.service;
+package com.yupi.yioj.service;
 
-import com.yupi.springbootinit.model.entity.User;
+import com.yupi.yioj.model.entity.User;
 import javax.annotation.Resource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
