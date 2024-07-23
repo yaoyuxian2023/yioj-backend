@@ -1,20 +1,17 @@
 package com.yupi.yioj.model.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
+import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
 import java.util.Date;
+import lombok.Data;
 
 /**
  * 题目提交
  * @TableName question_submit
  */
-@Data
 @TableName(value ="question_submit")
+@Data
 public class QuestionSubmit implements Serializable {
     /**
      * id
@@ -65,6 +62,7 @@ public class QuestionSubmit implements Serializable {
     /**
      * 是否删除
      */
+    @TableLogic
     private Integer isDelete;
 
     @TableField(exist = false)

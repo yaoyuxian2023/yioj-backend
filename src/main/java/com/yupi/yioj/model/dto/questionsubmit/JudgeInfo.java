@@ -14,13 +14,12 @@ public class JudgeInfo {
     private String message;
 
     /**
-     * 消耗时间
-     */
-    private Long time;
-
-    /**
      * 消耗内存
      */
     private Long memory;
 
+    /**
+     * 消耗时间（KB）
+     */
+    private Long time;
 }
