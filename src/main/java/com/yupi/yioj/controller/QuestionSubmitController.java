@@ -1,11 +1,15 @@
 package com.yupi.yioj.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yupi.yioj.common.BaseResponse;
 import com.yupi.yioj.common.ErrorCode;
 import com.yupi.yioj.common.ResultUtils;
 import com.yupi.yioj.exception.BusinessException;
 import com.yupi.yioj.model.dto.questionsubmit.QuestionSubmitAddRequest;
+import com.yupi.yioj.model.dto.questionsubmit.QuestionSubmitQueryRequest;
+import com.yupi.yioj.model.entity.QuestionSubmit;
 import com.yupi.yioj.model.entity.User;
+import com.yupi.yioj.model.vo.QuestionSubmitVO;
 import com.yupi.yioj.service.QuestionSubmitService;
 import com.yupi.yioj.service.UserService;
 import javax.annotation.Resource;
@@ -51,6 +55,24 @@ public class QuestionSubmitController {
         long questionId = questionSubmitAddRequest.getQuestionId();
         long result = questionSubmitService.doQuestionSubmit(questionSubmitAddRequest, loginUser);
         return ResultUtils.success(result);
+    }
+
+    /**
+     * 分页获取题目提交列表（除管理员外，普通用户只能看到非答案、代码提交里量等公开信息）
+     *
+     * @param questionSubmitQueryRequest
+     * @return
+     */
+    @PostMapping("/list/page")
+    public BaseResponse<Page<QuestionSubmitVO>> listQuestionSubmitByPage(@RequestBody QuestionSubmitQueryRequest questionSubmitQueryRequest,
+                                                                         HttpServletRequest request) {
+        long current = questionSubmitQueryRequest.getCurrent();
+        long size = questionSubmitQueryRequest.getPageSize();
+        // 得到前端传参获取的数据库信息(从数据库中获取原始的题目提交的分页信息)
+        Page<QuestionSubmit> questionSubmitPage = questionSubmitService.page(new Page<>(current, size),
+                questionSubmitService.getQueryWrapper(questionSubmitQueryRequest));
+        // 对信息进行脱敏
+        return ResultUtils.success(questionSubmitService.getQuestionSubmitVOPage(questionSubmitPage, request));
     }
 
 }
