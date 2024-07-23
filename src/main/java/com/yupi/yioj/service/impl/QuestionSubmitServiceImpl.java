@@ -9,6 +9,8 @@ import com.yupi.yioj.model.entity.Question;
 import com.yupi.yioj.model.entity.QuestionSubmit;
 import com.yupi.yioj.mapper.QuestionSubmitMapper;
 import com.yupi.yioj.model.entity.User;
+import com.yupi.yioj.model.enums.QuestionSubmitLanguageEnum;
+import com.yupi.yioj.model.enums.QuestionSubmitStatusEnum;
 import com.yupi.yioj.service.QuestionService;
 import com.yupi.yioj.service.QuestionSubmitService;
 import org.springframework.aop.framework.AopContext;
@@ -38,8 +40,12 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
      */
     @Override
     public long doQuestionSubmit(QuestionSubmitAddRequest questionSubmitAddRequest, User loginUser) {
-//        todo: 判断编程语言是否合法
-
+//        判断编程语言是否合法
+        String language = questionSubmitAddRequest.getLanguage();
+        QuestionSubmitLanguageEnum languageEnum = QuestionSubmitLanguageEnum.getEnumByValue(language);
+        if (languageEnum != null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "编程语言错误");
+        }
         long questionId =  questionSubmitAddRequest.getQuestionId();
         // 判断实体是否存在，根据类别获取实体
         Question question = questionService.getById(questionId);
@@ -54,8 +60,8 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
         questionSubmit.setCode(questionSubmitAddRequest.getCode());
         questionSubmit.setQuestionId(questionId);
         questionSubmit.setUserId(userId);
-//        todo: 设置提交题目状态初始化
-        questionSubmit.setStatus(0);
+    //  设置提交题目状态初始化
+    questionSubmit.setStatus(QuestionSubmitStatusEnum.WAITING.getValue());
         questionSubmit.setJudgeInfo("{}");
         boolean save = this.save(questionSubmit);
         if (!save) {
