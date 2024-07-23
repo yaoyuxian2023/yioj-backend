@@ -1,22 +1,23 @@
 package com.yupi.yioj.model.enums;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.apache.commons.lang3.ObjectUtils;
-
 /**
- * 题目提交状态枚举
+ * 题目提交枚举
  *
  * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
  * @from <a href="https://yupi.icu">编程导航知识星球</a>
  */
 public enum QuestionSubmitStatusEnum {
 
+    // 0 - 待判题、1 - 判题中、2 - 成功、3 - 失败
     WAITING("等待中", 0),
     RUNNING("判题中", 1),
-    SUCESS("成功", 2),
+    SUCCEED("成功", 2),
     FAILED("失败", 3);
 
     private final String text;
@@ -43,7 +44,7 @@ public enum QuestionSubmitStatusEnum {
      * @param value
      * @return
      */
-    public static QuestionSubmitStatusEnum getEnumByValue(String value) {
+    public static QuestionSubmitStatusEnum getEnumByValue(Integer value) {
         if (ObjectUtils.isEmpty(value)) {
             return null;
         }

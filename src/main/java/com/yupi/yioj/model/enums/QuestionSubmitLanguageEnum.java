@@ -1,9 +1,10 @@
 package com.yupi.yioj.model.enums;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.apache.commons.lang3.ObjectUtils;
 
 /**
  * 题目提交编程语言枚举
@@ -14,8 +15,8 @@ import org.apache.commons.lang3.ObjectUtils;
 public enum QuestionSubmitLanguageEnum {
 
     JAVA("java", "java"),
-    CPP("c++", "c++"),
-    GOLANG("golang", "golang");
+    CPLUSPLUS("cpp", "cpp"),
+    GOLANG("go", "go");
 
     private final String text;
 

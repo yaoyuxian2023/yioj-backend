@@ -1,7 +1,7 @@
 package com.yupi.yioj.mapper;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.yupi.yioj.model.entity.QuestionSubmit;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
 * @author Augus

@@ -1,11 +1,20 @@
 package com.yupi.yioj.model.dto.questionsubmit;
+
 import com.yupi.yioj.common.PageRequest;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
+
+/**
+ * 查询请求
+ *
+ * @author <a href="https://github.com/liyupi">程序员鱼皮</a>
+ * @from <a href="https://yupi.icu">编程导航知识星球</a>
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class QuestionSubmitQueryRequest extends PageRequest {
+public class QuestionSubmitQueryRequest extends PageRequest implements Serializable {
 
     /**
      * 编程语言
@@ -13,7 +22,7 @@ public class QuestionSubmitQueryRequest extends PageRequest {
     private String language;
 
     /**
-     * 题目状态
+     * 提交状态
      */
     private Integer status;
 
